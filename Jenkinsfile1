@@ -5,5 +5,6 @@ pipeline {
             steps {
                 echo 'this Test stage is executed successfully'
             }
+        }
     }
 }
