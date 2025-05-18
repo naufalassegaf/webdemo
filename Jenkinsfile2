@@ -1,0 +1,9 @@
+pipeline {
+     agent any
+      stages {
+        stage('Deploy'){
+            steps {
+                echo 'this Deploy stage is executed successfully'
+            }
+    }
+}
