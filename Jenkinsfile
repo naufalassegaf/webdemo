@@ -1,30 +1,35 @@
 pipeline {
     agent any
-
-    stages {
-        stage('Code') {
+      
+      stages{
+        stage('Install NGINX') {
             steps {
-                echo 'This stage is pulling the code'
+                echo 'Installing Nginx ...'
+                sh '''
+                   sudo yum install nginx -y
+                   sudo systemctl enable nginx
+                   sudo systemctl start nginx
+                '''
             }
         }
 
-        stage('Build') {
+        stage('Check NGINX status') {
             steps {
-                echo 'This stage is compiling the code'
+                echo 'Checking Nginx service status...'
+                sh 'sudo systemctl status nginx'
+                echo 'Checking Nginx HTTP response...'
+                sh 'sudo curl -I http://NGINX'
             }
-        }
+        }	
 
-        stage('Test') {
+        stage('Set Firewall for NGINX') {
             steps {
-                echo 'This stage is testing the compiled code result'
-            }
-        }
-
-        stage('Release') {
-            steps {
-                echo 'This stage is releasing the artifact'
-		        bat 'copy "C:\ProgramData\Jenkins\.jenkins\workspace\Web Demo\index.html" "C:\Program Files\Apache Software Foundation\Tomcat 10.1\webapps\examples" '
+                echo 'Setting firewall for NGINX...'
+                sh 'sudo firewall-cmd --permanent --add-service=http'
+                sh 'sudo firewall-cmd --reload'
+                sh 'sudo firewall-cmd --list-all | grep services'
+                echo 'Setting firewall is done...'
             }
         }
     }
-}
+}    
