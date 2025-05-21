@@ -40,5 +40,13 @@ pipeline {
                 echo 'Changing the Home Page...'
             }
         }
+
+        stage('Test The Home Page') {
+            steps {
+                echo 'Test the Home Page...'
+                sh 'curl http://devopsdemo.com'
+                echo 'The Change of Home Page is Successfully Tested...'
+            }
+        }
     }
 }    
