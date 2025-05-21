@@ -6,6 +6,8 @@ pipeline {
             steps {
                 echo 'Installing Nginx ...'
                 sh '''
+                   su naufal
+                   oracle
                    ssh NGINX sudo yum install nginx -y
                    ssh NGINX sudo systemctl enable nginx
                    ssh NGINX sudo systemctl start nginx
