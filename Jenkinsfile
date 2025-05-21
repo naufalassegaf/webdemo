@@ -18,7 +18,7 @@ pipeline {
                 echo 'Checking Nginx service status...'
                 sh 'sudo systemctl status nginx'
                 echo 'Checking Nginx HTTP response...'
-                sh 'sudo curl -I http://NGINX'
+                sh 'sudo curl -I http://localhost'
             }
         }	
 
