@@ -34,11 +34,10 @@ pipeline {
 
         stage('Change Home Page') {
             steps {
-                echo 'Changing the Home page...'
-                sh 'sudo firewall-cmd --permanent --add-service=http'
-                sh 'sudo firewall-cmd --reload'
-                sh 'sudo firewall-cmd --list-all | grep services'
-                echo 'Setting firewall is done...'
+                echo 'Changing the Home Page...'
+                sh 'cp /var/lib/jenkins/workspace/Pipeline_Demo1/github/index.html /usr/share/nginx/html/index.html'
+                sh 'cat /usr/share/nginx/html/index.html'
+                echo 'Changing the Home Page...'
             }
         }
     }
