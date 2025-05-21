@@ -35,7 +35,9 @@ pipeline {
         stage('Change Home Page') {
             steps {
                 echo 'Changing the Home Page...'
-                sh 'cp /var/lib/jenkins/workspace/Pipeline_Demo1/github/index.html /usr/share/nginx/html/index.html'
+                sh 'cd /usr/share/nginx/html'
+                sh 'sudo mv index.html index_old.html'
+                sh 'sudo cp /var/lib/jenkins/workspace/Pipeline_Demo1/github/index.html /usr/share/nginx/html/index.html'
                 sh 'cat /usr/share/nginx/html/index.html'
                 echo 'Changing the Home Page...'
             }
